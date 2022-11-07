@@ -22,7 +22,9 @@
     "qs": "^6.11.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.39.1",
     "react-if": "^4.1.4",
+    "react-use": "^17.4.0",
     "typescript": "4.8.4",
     "xml-js": "^1.6.11"
   },
