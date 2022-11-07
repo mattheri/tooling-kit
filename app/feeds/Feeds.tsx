@@ -30,14 +30,16 @@ const Feeds = asyncComponent(async () => {
   const feeds = await getFeeds();
 
   return (
-    feeds &&
-    Object.keys(feeds).map((key) => (
-      <FeedsList
-        key={key}
-        feeds={(feeds as Record<string, Feed[]>)[key]}
-        title={normalizedNames[key]}
-      />
-    ))
+    <>
+      {feeds &&
+        Object.keys(feeds).map((key) => (
+          <FeedsList
+            key={key}
+            feeds={(feeds as Record<string, Feed[]>)[key]}
+            title={normalizedNames[key]}
+          />
+        ))}
+    </>
   );
 });
 
