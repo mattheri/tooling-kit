@@ -12,7 +12,7 @@ const Favorites = () => {
   const feeds = favorites.filter((favorite) => favorite.type === "feed");
 
   return (
-    <div className="max-w-xl">
+    <div className="max-w-[120rem]">
       <When condition={feeds.length}>
         <FeedsList title="Feeds">
           {feeds.map(({ feed }) => (
