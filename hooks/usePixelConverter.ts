@@ -4,8 +4,8 @@ import PixelConverter from "../tools/pixel-converter";
 type Unit = "em" | "rem";
 
 interface Props {
-  rootEm: string;
-  to: Unit;
+  rootEm?: string;
+  to?: Unit;
 }
 
 interface ReturnType {
@@ -32,9 +32,12 @@ const usePixelConverter: PixelConverterHook = (
   const { rootEm, to } = props;
   const [convertedValue, setConvertedValue] = useState<number | null>(null);
 
-  const rootEmValue = parseFloat(rootEm);
+  const rootEmValue = parseFloat(rootEm?.trim() ?? "16px");
 
-  const pixelConverter = useMemo(() => new PixelConverter(rootEmValue), []);
+  const pixelConverter = useMemo(
+    () => new PixelConverter(rootEmValue),
+    [rootEmValue]
+  );
 
   useEffect(() => {
     const convertedValue = pixelConverter.pxToRem(
@@ -46,7 +49,7 @@ const usePixelConverter: PixelConverterHook = (
 
   return {
     convertedValue: convertedValue ?? parseFloat(valueToConvert),
-    to,
+    to: to ?? "rem",
   };
 };
 
