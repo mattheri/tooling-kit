@@ -18,6 +18,7 @@ enum Defaults {
   MaxWidthValue = "1440px",
   CopyText = "Copied!",
   DefaultText = "Click to copy",
+  NumberOfProperties = 3,
 }
 
 const ResponsiveFont = () => {
@@ -89,7 +90,9 @@ const ResponsiveFont = () => {
 
           currentObject[property] = rules[key];
 
-          if (Object.keys(currentObject).length === 3) {
+          if (
+            Object.keys(currentObject).length === Defaults.NumberOfProperties
+          ) {
             currentObject = {
               ...currentObject,
               maxWidth: data.maxWidth,
