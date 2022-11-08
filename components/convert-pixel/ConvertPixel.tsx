@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useCopyToClipboard } from "react-use";
 import usePixelConverter from "../../hooks/usePixelConverter";
+import FavoriteToolButton from "../favorite-tool-button/FavoriteToolButton";
 import Input from "../input/Input";
 
 const DEFAULT_TEXT = "Click to copy";
@@ -49,9 +50,12 @@ const ConvertPixel = () => {
 
   return (
     <section className="py-6 max-w-[120rem] mx-auto">
-      <h3 className="text-4xl font-black mb-3 text-sky-800 w-fit text-center mx-auto">
-        Pixel to Rem Converter
-      </h3>
+      <div className="flex gap-4 w-fit mx-auto">
+        <h3 className="text-4xl font-black mb-3 text-sky-800 w-fit text-center">
+          Pixel to Rem Converter
+        </h3>
+        <FavoriteToolButton componentName="convert-pixel/ConvertPixel.tsx" />
+      </div>
       <form className="flex flex-wrap w-full gap-4 px-4 lg:px-0 py-6">
         <div className="flex items-center flex-1 gap-4 min-w-full lg:min-w-fit">
           <div className="flex-1 min-w-[50%]">

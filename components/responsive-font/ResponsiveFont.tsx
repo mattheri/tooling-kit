@@ -7,6 +7,7 @@ import useCreateResponsiveFonts, {
   IResponsiveFontProps,
 } from "../../hooks/useCreateResponsiveFonts";
 import Button from "../button/Button";
+import FavoriteToolButton from "../favorite-tool-button/FavoriteToolButton";
 import Input from "../input/Input";
 
 enum Defaults {
@@ -124,9 +125,12 @@ const ResponsiveFont = () => {
 
   return (
     <section className="py-6">
-      <h3 className="text-4xl font-black mb-3 text-sky-800 w-fit text-center mx-auto">
-        Create Responsive Fonts
-      </h3>
+      <div className="mx-auto flex gap-4 w-fit">
+        <h3 className="text-4xl font-black mb-3 text-sky-800 w-fit text-center">
+          Create Responsive Fonts
+        </h3>
+        <FavoriteToolButton componentName="responsive-font/ResponsiveFont.tsx" />
+      </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="p-4 lg:px-0 flex gap-4 max-w-[120rem] mx-auto flex-wrap">
           <div className="flex-1 min-w-[20rem]">

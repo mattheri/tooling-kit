@@ -21,10 +21,16 @@ export interface IFeed {
   favorite: string;
 }
 
+export interface ITool {
+  id: string;
+  component: string;
+}
+
 export default class Db extends Dexie {
   favorite!: Dexie.Table<IFavorite, string>;
   html!: Dexie.Table<IHtml, string>;
   feed!: Dexie.Table<IFeed, string>;
+  tool!: Dexie.Table<ITool, string>;
 
   constructor() {
     super("Favorites");
@@ -33,6 +39,7 @@ export default class Db extends Dexie {
       favorite: "id, type, persistentLink",
       html: "id, html, favorite",
       feed: "id, title, link, description, pubDate",
+      tool: "id, component",
     });
   }
 }
