@@ -9,7 +9,7 @@ const FavoritesTool = () => {
   const db = useMemo(() => new Db(), []);
 
   const importFavoriteTool = async (componentName: string) => {
-    const component = dynamic(() => import(`../${componentName}`));
+    const component = dynamic(() => import(`/components/${componentName}`));
 
     setFavoritedComponents((prev) => [...new Set([...prev, component])]);
   };
