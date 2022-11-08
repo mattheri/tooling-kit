@@ -15,7 +15,7 @@ const Favorites = () => {
     <div className="max-w-[120rem] mx-auto">
       <When condition={feeds.length}>
         <FeedsList title="Feeds">
-          <div className="p-4">
+          <div className="p-4 flex flex-col gap-4">
             {feeds.map(({ feed }) => (
               <Feed key={feed?.id} {...feed!} />
             ))}
