@@ -1,31 +1,17 @@
-"use client";
-
-import useFavorites from "../../hooks/useFavorites";
-import FeedsList from "../feeds-list/FeedsList";
-
-import { When } from "react-if";
-import Feed from "../feed/Feed";
 import FavoritesTool from "../favorites-tool/FavoritesTool";
+import FavoriteFeedsLoader from "../../local-db-components/FavoriteFeedsLoader";
+import FavoriteFeeds from "../favorite-feeds/FavoriteFeeds";
+import FavoriteToolsLoader from "../../local-db-components/FavoriteToolsLoader";
 
 const Favorites = () => {
-  const favorites = useFavorites();
-
-  const feeds = favorites.filter((favorite) => favorite.type === "feed");
-
   return (
     <>
-      <div className="max-w-[120rem] mx-auto">
-        <When condition={feeds.length}>
-          <FeedsList title="Feeds">
-            <div className="p-4 flex flex-col gap-4">
-              {feeds.map(({ feed }) => (
-                <Feed key={feed?.id} {...feed!} />
-              ))}
-            </div>
-          </FeedsList>
-        </When>
-      </div>
-      <FavoritesTool />
+      <FavoriteFeedsLoader>
+        <FavoriteFeeds />
+      </FavoriteFeedsLoader>
+      <FavoriteToolsLoader>
+        <FavoritesTool />
+      </FavoriteToolsLoader>
     </>
   );
 };

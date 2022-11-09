@@ -1,35 +1,21 @@
-import dynamic from "next/dynamic";
-import { useLiveQuery } from "dexie-react-hooks";
-import { useMemo, useState } from "react";
-import Db from "../../favorites/db";
+import { When } from "react-if";
+import { StatelessComponent } from "../../types";
 
-const FavoritesTool = () => {
-  const [favoritedComponents, setFavoritedComponents] = useState<any[]>([]);
+interface Props {
+  favoritedComponents?: React.FC[];
+}
 
-  const db = useMemo(() => new Db(), []);
-
-  const importFavoriteTool = async (componentName: string) => {
-    const component = dynamic(() => import(`/components/${componentName}`));
-
-    setFavoritedComponents((prev) => [...new Set([...prev, component])]);
-  };
-
-  useLiveQuery(() => {
-    db.tool.toArray().then((tools) => {
-      setFavoritedComponents([]);
-
-      tools.forEach(({ component }) => {
-        importFavoriteTool(component);
-      });
-    });
-  });
-
+const FavoritesTool: StatelessComponent<Props> = ({ favoritedComponents }) => {
   return (
-    <div>
-      {favoritedComponents.map((Component, index) => (
-        <Component key={index} />
-      ))}
-    </div>
+    <When condition={!!favoritedComponents}>
+      {() => (
+        <>
+          {favoritedComponents?.map((Component, index) => (
+            <Component key={index} />
+          ))}
+        </>
+      )}
+    </When>
   );
 };
 

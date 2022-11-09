@@ -3,7 +3,7 @@ import Db, { IFavorite, IFeed } from "../favorites/db";
 import { useLiveQuery } from "dexie-react-hooks";
 import useWindow from "./useWindow";
 
-interface Favorite extends IFavorite {
+export interface Favorite extends IFavorite {
   feed?: IFeed;
 }
 
