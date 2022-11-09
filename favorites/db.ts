@@ -20,7 +20,7 @@ export default class Db extends Dexie {
   constructor() {
     super("Favorites");
 
-    this.version(1).stores({
+    this.version(2).stores({
       feed: "id, title, link, description, pubDate",
       tool: "id, component",
     });
