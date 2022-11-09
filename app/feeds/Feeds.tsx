@@ -11,19 +11,13 @@ import {
 } from "../../feeds/constants";
 
 const getFeeds = async () => {
-  const mediumFeeds = await queryAllFeeds({
+  const feeds = await queryAllFeeds({
     medium: mediumFeedUrl,
-  });
-
-  const cssTricksFeeds = await queryAllFeeds({
     cssTricks: cssTricksFeedUrl,
-  });
-
-  const devToFeeds = await queryAllFeeds({
     devTo: devToFeedUrl,
   });
 
-  return { ...mediumFeeds, ...cssTricksFeeds, ...devToFeeds };
+  return { ...feeds };
 };
 
 const Feeds = asyncComponent(async () => {
@@ -31,14 +25,13 @@ const Feeds = asyncComponent(async () => {
 
   return (
     <>
-      {feeds &&
-        Object.keys(feeds).map((key) => (
-          <FeedsList
-            key={key}
-            feeds={(feeds as Record<string, Feed[]>)[key]}
-            title={normalizedNames[key]}
-          />
-        ))}
+      {Object.keys(feeds).map((key) => (
+        <FeedsList
+          key={key}
+          feeds={(feeds as Record<string, Feed[]>)[key]}
+          title={normalizedNames[key]}
+        />
+      ))}
     </>
   );
 });

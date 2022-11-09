@@ -2,13 +2,11 @@
 
 import { Children, cloneElement } from "react";
 import { When } from "react-if";
-import useFavorites from "../hooks/useFavorites";
+import useFavoriteFeeds from "../hooks/useFavoriteFeeds";
 import { StatefulComponentWithChildren } from "../types";
 
 const FavoriteFeedsLoader: StatefulComponentWithChildren = ({ children }) => {
-  const favorites = useFavorites();
-
-  const feeds = favorites.filter((favorite) => favorite.type === "feed");
+  const feeds = useFavoriteFeeds();
 
   return (
     <When condition={feeds && feeds.length && !!children}>

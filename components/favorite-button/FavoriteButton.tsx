@@ -1,7 +1,7 @@
 "use client";
 
 import { Feed } from "../../feeds/client";
-import useFavorite from "../../hooks/useFavorite";
+import useFavorite from "../../hooks/useFavoriteFeed";
 import { StatefulComponent } from "../../types";
 
 interface Props {

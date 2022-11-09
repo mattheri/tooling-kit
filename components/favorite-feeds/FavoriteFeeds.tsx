@@ -1,12 +1,12 @@
 import React from "react";
 import { When } from "react-if";
-import { Favorite } from "../../hooks/useFavorites";
+import { IFeed } from "../../favorites/db";
 import { StatelessComponent } from "../../types";
 import Feed from "../feed/Feed";
 import FeedsList from "../feeds-list/FeedsList";
 
 interface Props {
-  feeds?: Favorite[];
+  feeds?: IFeed[];
 }
 
 const FavoriteFeeds: StatelessComponent<Props> = ({ feeds }) => {
@@ -15,7 +15,7 @@ const FavoriteFeeds: StatelessComponent<Props> = ({ feeds }) => {
       <When condition={feeds && feeds.length}>
         <FeedsList title="Feeds">
           <div className="p-4 flex flex-col gap-4">
-            {feeds?.map(({ feed }) => (
+            {feeds?.map((feed) => (
               <Feed key={feed?.id} {...feed!} />
             ))}
           </div>

@@ -10,14 +10,13 @@ import formateDate from "./formatDate";
 import FavoriteButton from "../favorite-button/FavoriteButton";
 import Db from "../../favorites/db";
 import { useLiveQuery } from "dexie-react-hooks";
-import useWindow from "../../hooks/useWindow";
 
 interface Props {
   title: string;
   description: string;
   pubDate: string;
   link: string;
-  favoriteId?: string;
+  favoriteFeedId?: string;
 }
 
 const Feed: StatefulComponent<Props> = ({
@@ -25,30 +24,34 @@ const Feed: StatefulComponent<Props> = ({
   description,
   pubDate,
   link,
-  favoriteId,
+  favoriteFeedId,
 }) => {
   const [html, setHtml] = useState("");
   const [date, setDate] = useState(pubDate);
-  const [favorite, setFavorite] = useState(favoriteId);
+  const [favoriteFeed, setFavoriteFeed] = useState(favoriteFeedId);
 
   const ref = useRef<HTMLElement>(null);
   const db = useMemo(() => new Db(), []);
-  const w = useWindow();
 
   useEffect(() => setHtml(description), [description]);
   useEffect(() => setDate(formateDate(pubDate)), [pubDate]);
 
   useLiveQuery(() => {
     try {
-      db.favorite
-        .where("persistentLink")
+      db.feed
+        .where("link")
         .equals(link)
         .first()
-        .then((result) => setFavorite(result?.id));
+        .then((feed) => {
+          console.log(feed);
+          if (feed) {
+            setFavoriteFeed(feed.id);
+          }
+        });
     } catch (error) {
       console.log(error);
     }
-  }, [link, w]);
+  }, [link]);
 
   return (
     <article
@@ -73,7 +76,7 @@ const Feed: StatefulComponent<Props> = ({
         </When>
       </FeedLink>
       <FavoriteButton
-        favoriteId={favorite}
+        favoriteId={favoriteFeed}
         persistentLink={link}
         feed={{
           title,

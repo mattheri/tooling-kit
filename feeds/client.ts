@@ -76,7 +76,7 @@ export const createFeed: CreateFeed = async (options) => {
   const parserReadyOptions = Object.fromEntries(
     Object.entries(options).map(([key, value]) => {
       if (key.match(/[A-Z]/)) {
-        const newKey = key.replace(
+        const newKey: string = key.replace(
           /[A-Z]/,
           (match) => `-${match.toLowerCase()}`
         );
@@ -119,13 +119,21 @@ export const queryAllFeeds = async <T extends Record<string, string>>(
   feeds: T
 ) => {
   try {
-    const rss = (await Object.keys(feeds).reduce(async (acc, curr) => {
-      const response = await fetch(feeds[curr]);
+    let rss: { [P in keyof T]: Feed[] };
 
-      const data = (await response.json()).items;
+    const promises = Object.entries(feeds).map(async ([key, value]) => {
+      const response = await fetch(value);
 
-      return { ...acc, [curr]: data };
-    }, {})) as Promise<{ [P in keyof T]: Feed[] }>;
+      if (!response.ok) throw new Error(response.statusText);
+
+      const data = ((await response.json()) as any).items;
+
+      return { [key]: data };
+    });
+
+    const results = await Promise.all(promises);
+
+    rss = Object.assign({}, ...results);
 
     return rss;
   } catch (e) {
