@@ -10,8 +10,6 @@ const useFavoriteFeeds = () => {
   const getFavorites = useCallback(async () => {
     const feeds = await db.feed.toArray();
 
-    console.log(feeds);
-
     setFavoriteFeeds(feeds);
   }, [db]);
 
