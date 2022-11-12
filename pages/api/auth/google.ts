@@ -35,7 +35,7 @@ export default async function handler(
 
     const { data } = await response.json();
 
-    if (!data || !data.user) {
+    if (!data) {
       throw new Error(ErrorMessage.NoUserFound);
     }
 
