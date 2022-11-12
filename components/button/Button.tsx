@@ -1,12 +1,17 @@
+"use client";
+
 import { ButtonHTMLAttributes } from "react";
 import { StatelessComponentWithChildren } from "../../types";
 import cn from "classnames";
 
-interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {}
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+  isLoading?: boolean;
+}
 
 const Button: StatelessComponentWithChildren<Props> = ({
   children,
   className,
+  isLoading,
   ...props
 }) => {
   return (

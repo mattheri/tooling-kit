@@ -1,3 +1,4 @@
+import UserInputController from "../user-input-controller/UserInputController";
 import NavItem from "./NavItem";
 
 const Navbar = () => {
@@ -8,6 +9,7 @@ const Navbar = () => {
         <NavItem href="/feeds">Feeds</NavItem>
         <NavItem href="/tools">Tools</NavItem>
       </ul>
+      <UserInputController />
     </nav>
   );
 };

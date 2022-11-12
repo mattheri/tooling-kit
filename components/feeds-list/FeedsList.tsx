@@ -10,19 +10,35 @@ import Feed from "../feed/Feed";
 interface Props {
   feeds?: IFeed[];
   title?: string;
+  feedLink?: string;
 }
 
 const FeedsList: StatelessComponentWithChildren<Props> = ({
   feeds,
   title,
+  feedLink,
   children,
 }) => {
   return (
     <section className="overflow-auto overflow-x-hidden w-full lg:max-h-[calc(100vh-5rem)] flex flex-col gap-4 bg-slate-400 px-3 lg:last-of-type:pl-0 lg:first-of-type:pr-0">
       <When condition={!!title}>
-        <h1 className="w-[calc(100%+1.5rem)] translate-x-[calc(-0.75rem)] text-5xl font-black text-sky-800 lg:sticky top-0 z-10 bg-white p-3 -mb-4">
-          {title}
-        </h1>
+        <If condition={!!feedLink}>
+          <Then>
+            <a
+              href={feedLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-[calc(100%+1.5rem)] translate-x-[calc(-0.75rem)] text-5xl font-black text-sky-800 lg:sticky top-0 z-10 bg-white p-3 -mb-4"
+            >
+              {title}
+            </a>
+          </Then>
+          <Else>
+            <h1 className="w-[calc(100%+1.5rem)] translate-x-[calc(-0.75rem)] text-5xl font-black text-sky-800 lg:sticky top-0 z-10 bg-white p-3 -mb-4">
+              {title}
+            </h1>
+          </Else>
+        </If>
       </When>
       <If condition={feeds && feeds.length}>
         <Then>

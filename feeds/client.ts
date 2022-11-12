@@ -93,8 +93,6 @@ export const createFeed: CreateFeed = async (options) => {
       .withQueryParams({ auth: `${key}`, ...parserReadyOptions })
       .build();
 
-    console.log(url.href);
-
     const response = await fetch(url.href);
 
     if (!response.ok) throw new Error(response.statusText);

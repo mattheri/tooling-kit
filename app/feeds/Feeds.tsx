@@ -6,6 +6,7 @@ import { Feed, queryAllFeeds } from "../../feeds/client";
 import {
   cssTricksFeedUrl,
   devToFeedUrl,
+  feedUrls,
   mediumFeedUrl,
   normalizedNames,
 } from "../../feeds/constants";
@@ -28,6 +29,7 @@ const Feeds = asyncComponent(async () => {
       {Object.keys(feeds).map((key) => (
         <FeedsList
           key={key}
+          feedLink={feedUrls[key]}
           feeds={(feeds as Record<string, Feed[]>)[key]}
           title={normalizedNames[key]}
         />

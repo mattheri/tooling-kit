@@ -1,4 +1,4 @@
-import type { StatelessComponentWithChildren } from "../types";
+import { StatelessComponentWithChildren } from "../types";
 
 import "../styles/globals.css";
 import Navbar from "../components/navbar/Navbar";

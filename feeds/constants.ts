@@ -21,3 +21,8 @@ export const normalizedNames: Record<string, string> = {
   cssTricks: "CSS Tricks",
   devTo: "Dev.to",
 };
+export const feedUrls: Record<string, string> = {
+  medium: "https://medium.com/",
+  cssTricks: "https://css-tricks.com/",
+  devTo: "https://dev.to/",
+};
